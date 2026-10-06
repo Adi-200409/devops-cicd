@@ -11,21 +11,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code checkout
-        run: echo "Code checkout done"
+        uses: actions/checkout@v7
 
   build:
+    needs: code
     runs-on: ubuntu-latest
     steps:
-      - name: Code Build
-        run: echo "Code build done"
+      - name: Code Build with docker
+        run: echo "build"
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Code test
         run: echo "Code test done"
 
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Code Deploy
